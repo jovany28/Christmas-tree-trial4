@@ -1,0 +1,600 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>December With Jesus</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#070d1f;--em:#0b3d2e;--gold:#d4af37;--champ:#f3e3b3;--ivory:#fbf6e9;--glow:#ffd98a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;overflow-x:hidden}
+body{background:radial-gradient(ellipse at 50% 0,#14264f 0,var(--navy) 60%);color:var(--ivory);font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:600}
+.ar{font-family:'Amiri','Segoe UI',Tahoma,serif;font-size:22px;color:#fff;direction:rtl;text-align:right;line-height:1.9}
+[hidden]{display:none!important}@keyframes fi{from{opacity:0;transform:translateY(24px) scale(.97)}}.stars,.snow{position:fixed;inset:0;pointer-events:none}
+.stars{background:radial-gradient(1px 1px at 10% 20%,#fff,transparent),radial-gradient(1.5px 1.5px at 30% 8%,#fff,transparent),radial-gradient(1px 1px at 55% 25%,#fff,transparent),radial-gradient(1.5px 1.5px at 75% 12%,#fff,transparent),radial-gradient(1px 1px at 90% 30%,#fff,transparent),radial-gradient(1px 1px at 20% 45%,#fff8,transparent),radial-gradient(1px 1px at 85% 55%,#fff8,transparent);animation:tw 4s infinite alternate}
+.snow{background:radial-gradient(3px 3px at 15% 10%,#fff9,transparent),radial-gradient(2px 2px at 45% 30%,#fff9,transparent),radial-gradient(3px 3px at 70% 5%,#fff9,transparent),radial-gradient(2px 2px at 90% 40%,#fff9,transparent);background-size:300px 300px;animation:fall 14s linear infinite}
+@keyframes fall{to{background-position:40px 300px}}@keyframes tw{to{opacity:.5}}
+.screen{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:16px}
+#intro{justify-content:center;text-align:center;gap:14px}
+h1{font-size:clamp(34px,9vw,68px);letter-spacing:.12em;margin:0;color:var(--champ);text-shadow:0 0 30px #d4af3788}
+.tag{color:var(--gold);letter-spacing:.08em;margin:0}
+.bstar{font-size:64px;color:var(--glow);filter:drop-shadow(0 0 18px var(--gold));animation:tw 2s infinite alternate}
+button{font:inherit;cursor:pointer;color:var(--navy);background:linear-gradient(#f3e3b3,#d4af37);border:0;border-radius:30px;padding:10px 22px;letter-spacing:.08em;font-weight:700}
+button.ghost{background:#0006;color:var(--champ);border:1px solid #d4af3788;padding:8px 14px;font-size:15px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center;width:100%;max-width:560px;position:relative}
+#tree{width:100%;max-width:460px;height:auto;margin-top:6px}
+.orn{cursor:pointer}.orn .b{filter:drop-shadow(0 0 5px var(--glow));transition:.2s}.orn:hover .b,.orn:focus .b{transform:scale(1.18);transform-box:fill-box;transform-origin:center}
+.orn.got .b{stroke:var(--gold);stroke-width:2;filter:none;opacity:.8}
+.prog{font-size:15px;color:var(--champ);letter-spacing:.1em;text-align:center}
+.pb{height:6px;background:#fff2;border-radius:4px;overflow:hidden;margin:6px auto;max-width:300px}.pb i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--glow))}
+.ov{position:fixed;inset:0;background:#030712ee;overflow-y:auto;padding:max(16px,env(safe-area-inset-top)) 16px 40px;z-index:5}
+.ov>div{max-width:620px;margin:0 auto;animation:fi .5s ease-out}
+.card{background:linear-gradient(160deg,#0f2a22f2,#0a1230f2);border:1px solid #d4af3766;border-radius:16px;padding:16px;margin:12px 0}
+.card h4{margin:0 0 4px;color:var(--gold);letter-spacing:.15em;font-size:17px}.card p{margin:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.mini{cursor:pointer}.mini:hover{border-color:var(--gold)}
+.row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:12px 0}
+select{background:#0008;color:var(--champ);border:1px solid #d4af3788;border-radius:20px;padding:8px 12px;font:inherit}
+.c{text-align:center}.sm{font-size:14px;opacity:.8}
+</style></head><body><div class="stars"></div><div class="snow"></div>
+<div class="screen" id="intro"><div class="bstar">✦</div><h1>DECEMBER<br>WITH JESUS</h1><p class="tag">31 Days. 31 Gifts. One Journey of Love.</p><button id="go">START YOUR JOURNEY</button></div>
+<div class="screen" id="main" hidden>
+<div class="bar"><button class="ghost" id="bk">🎁 MY GIFT BANK</button><button class="ghost" id="mu" title="Play / pause">♪</button><input id="vol" type="range" min="0" max="100" value="70" aria-label="Volume" style="width:80px"><button class="ghost" id="hp">?</button></div>
+<div class="prog" id="pg"></div><div class="pb"><i id="pf"></i></div>
+<svg id="tree" viewBox="0 0 400 470" role="group" aria-label="31 ornaments"></svg>
+<p class="sm c" id="demo"></p></div>
+<div class="ov" id="ov" hidden><div id="ovc"></div></div>
+<script type="text/plain" id="sqlsrc">-- # December With Jesus - setup
+-- 1. Supabase: new project > Auth > enable **Anonymous sign-ins**.
+-- 2. SQL editor: run `schema_and_seed.sql`.
+-- 3. In index.html set `SB_URL` and `SB_KEY` (anon public key ONLY, never service-role). Empty = local demo mode (browser storage, not secure/permanent).
+-- 4. Deploy index.html to any static host (Netlify/Vercel/GitHub Pages).
+-- 5. Tests: open ornament 5 -> gift; click 5 again -> "already received"; Gift Bank shows same text/date; refresh -> unchanged; double-click fast -> 1 row (UNIQUE(visitor_id, ornament_id)).
+-- ## Flags in your Excel
+-- - Only 20 themes, 5 verses each (theme 20 has 4 and is titled "مواضيع مختلفة" - rename it). Verses 21-31 are my additions (1-2 each): please verify.
+-- - Fixed: missing opening « (theme 3 verse 2, theme 20 verse 1) and a stray "27." prefix.
+-- - Messages/reflections/prayers are NOT in the file: I used 3 draft templates each - replace with approved Egyptian Arabic text.
+-- - Anonymous accounts are lost if browser data is cleared unless a login is linked (not built yet).
+
+-- DECEMBER WITH JESUS - Supabase schema. Run in SQL editor, then enable Auth > Anonymous sign-ins.
+create table ornaments(id int primary key,n int unique not null check(n between 1 and 31),title_en text,title_ar text,is_active bool default true,created_at timestamptz default now());
+create table bible_verses(id serial primary key,ornament_id int references ornaments,verse_text text not null,bible_reference text not null,language text default 'ar',translation text default 'as supplied',content_version int default 1,is_active bool default true);
+create table message_variations(id serial primary key,ornament_id int references ornaments,message_text text not null,language text default 'ar',content_version int default 1,is_active bool default true);
+create table reflections(id serial primary key,ornament_id int references ornaments,reflection_text text not null,language text default 'ar',content_version int default 1,is_active bool default true);
+create table prayers(id serial primary key,ornament_id int references ornaments,prayer_text text not null,language text default 'ar',content_version int default 1,is_active bool default true);
+create table visitors(id uuid primary key,created_at timestamptz default now(),updated_at timestamptz default now(),preferences jsonb default '{}');
+create table visitor_ornament_assignments(
+ id bigserial primary key,visitor_id uuid not null references visitors(id),ornament_id int not null references ornaments(id),
+ bible_verse_id int,message_id int,reflection_id int,prayer_id int,
+ saved_verse_text text not null,saved_bible_reference text not null,saved_message_text text not null,saved_reflection_text text not null,saved_prayer_text text not null,
+ content_snapshot jsonb not null,received_at timestamptz not null default now(),created_at timestamptz default now(),
+ unique(visitor_id,ornament_id));
+-- progress is DERIVED from assignments (no separate counter table to trust)
+alter table ornaments enable row level security;alter table bible_verses enable row level security;alter table message_variations enable row level security;
+alter table reflections enable row level security;alter table prayers enable row level security;
+alter table visitors enable row level security;alter table visitor_ornament_assignments enable row level security;
+create policy own_visitor on visitors for select using(id=auth.uid());
+create policy own_gifts on visitor_ornament_assignments for select using(visitor_id=auth.uid());
+-- no insert/update/delete policies: clients can only write through the RPCs below.
+revoke all on all tables in schema public from anon,authenticated;
+grant select on visitors,visitor_ornament_assignments to authenticated;
+
+create function register_anonymous_visitor() returns uuid language plpgsql security definer set search_path=public as $$
+begin if auth.uid() is null then raise exception 'AUTH_REQUIRED';end if;
+insert into visitors(id) values(auth.uid()) on conflict do nothing;return auth.uid();end$$;
+
+create function open_ornament_once(p_number int) returns jsonb language plpgsql security definer set search_path=public as $$
+declare u uuid:=auth.uid();o ornaments;v bible_verses;m message_variations;r reflections;p prayers;snap jsonb;a visitor_ornament_assignments;
+begin
+ if u is null then raise exception 'AUTH_REQUIRED';end if;
+ select * into o from ornaments where n=p_number and is_active;
+ if not found then raise exception 'INVALID_ORNAMENT';end if;
+ insert into visitors(id) values(u) on conflict do nothing;
+ if exists(select 1 from visitor_ornament_assignments where visitor_id=u and ornament_id=o.id) then return jsonb_build_object('status','ALREADY_RECEIVED');end if;
+ select * into v from bible_verses where ornament_id=o.id and is_active order by random() limit 1;
+ select * into m from message_variations where ornament_id=o.id and is_active order by random() limit 1;
+ select * into r from reflections where ornament_id=o.id and is_active order by random() limit 1;
+ select * into p from prayers where ornament_id=o.id and is_active order by random() limit 1;
+ if v.id is null or m.id is null or r.id is null or p.id is null then raise exception 'CONTENT_MISSING';end if;
+ snap:=jsonb_build_object('n',o.n,'en',o.title_en,'ar',o.title_ar,'verse',v.verse_text,'ref',v.bible_reference,'msg',m.message_text,'refl',r.reflection_text,'prayer',p.prayer_text);
+ insert into visitor_ornament_assignments(visitor_id,ornament_id,bible_verse_id,message_id,reflection_id,prayer_id,saved_verse_text,saved_bible_reference,saved_message_text,saved_reflection_text,saved_prayer_text,content_snapshot)
+ values(u,o.id,v.id,m.id,r.id,p.id,v.verse_text,v.bible_reference,m.message_text,r.reflection_text,p.prayer_text,snap)
+ on conflict(visitor_id,ornament_id) do nothing returning * into a;
+ if a.id is null then return jsonb_build_object('status','ALREADY_RECEIVED');end if; -- lost a race
+ return jsonb_build_object('status','OPENED','gift',a.content_snapshot||jsonb_build_object('at',a.received_at));
+end$$;
+
+create function get_gift_bank() returns jsonb language sql stable security definer set search_path=public as $$
+ select coalesce(jsonb_agg(content_snapshot||jsonb_build_object('at',received_at) order by ornament_id),'[]') from visitor_ornament_assignments where visitor_id=auth.uid()$$;
+create function get_gift_bank_item(p_number int) returns jsonb language sql stable security definer set search_path=public as $$
+ select content_snapshot||jsonb_build_object('at',received_at) from visitor_ornament_assignments a join ornaments o on o.id=a.ornament_id where a.visitor_id=auth.uid() and o.n=p_number$$;
+create function get_final_progress() returns jsonb language sql stable security definer set search_path=public as $$
+ select jsonb_build_object('total_received',count(*),'total',31,'last_received_at',max(received_at)) from visitor_ornament_assignments where visitor_id=auth.uid()$$;
+create function get_visitor_progress() returns jsonb language sql stable security definer set search_path=public as $$ select get_final_progress()$$;
+create function get_available_ornaments() returns jsonb language sql stable security definer set search_path=public as $$
+ select jsonb_agg(jsonb_build_object('n',o.n,'title',o.title_en,'status',case when a.id is null then 'AVAILABLE' else 'RECEIVED' end) order by o.n)
+ from ornaments o left join visitor_ornament_assignments a on a.ornament_id=o.id and a.visitor_id=auth.uid() where o.is_active$$;
+create function get_ornament_status(p_number int) returns text language sql stable security definer set search_path=public as $$
+ select case when exists(select 1 from visitor_ornament_assignments a join ornaments o on o.id=a.ornament_id where a.visitor_id=auth.uid() and o.n=p_number) then 'RECEIVED' else 'AVAILABLE' end$$;
+create function update_visitor_preferences(p jsonb) returns void language sql security definer set search_path=public as $$
+ update visitors set preferences=p,updated_at=now() where id=auth.uid()$$;
+revoke execute on all functions in schema public from public,anon;
+grant execute on all functions in schema public to authenticated;
+
+-- SEED (generated). Verses from your Excel; message/reflection/prayer are DRAFT templates - replace with approved text.
+insert into ornaments(id,n,title_en,title_ar) values(1,1,'God’s Love','محبة');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(1,'«الله محبة»','١ يوحنا ٤:٨');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(1,'«لتصر كل أموركم في محبة»','١ كورنثوس ١٦:١٤');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(1,'«المحبة تتأنى وترفق»','١ كورنثوس ١٣:٤');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(1,'«المحبة لا تسقط أبداً»','١ كورنثوس ١٣:٨');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(1,'«بهذا يعرف الجميع أنكم تلاميذي: إن كان لكم حب بعضاً لبعض»','يوحنا ١٣:٣٥');
+insert into message_variations(ornament_id,message_text) values(1,'يا صاحبي، الهدية دي عن «محبة». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(1,'مش صدفة إنك فتحت الهدية دي. «محبة» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(1,'وسط زحمة الأيام ربنا فاكرك. خلّي «محبة» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(1,'فكّر دقيقة: فين محتاج «محبة» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(1,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(1,'اسأل نفسك: لو «محبة» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(1,'يا رب، علّمني معنى «محبة» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(1,'يا رب، قلبي بين إيديك. خلّي «محبة» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(1,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «محبة». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(2,2,'Faithfulness','الأمانة');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(2,'«كن أميناً إلى الموت فسأعطيك إكليل الحياة»','رؤيا ٢:١٠');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(2,'«الأمين في القليل أمين أيضاً في الكثير»','لوقا ١٦:١٠');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(2,'«حسناً أيها العبد الصالح والأمين»','متى ٢٥:٢١');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(2,'«وأما المطلوب في الوكلاء فهو أن يوجد الإنسان أميناً»','١ كورنثوس ٤:٢');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(2,'«ليكن كل واحد كما أخذ موهبة يخدم بها بعضكم بعضاً»','١ بطرس ٤:١٠');
+insert into message_variations(ornament_id,message_text) values(2,'يا صاحبي، الهدية دي عن «الأمانة». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(2,'مش صدفة إنك فتحت الهدية دي. «الأمانة» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(2,'وسط زحمة الأيام ربنا فاكرك. خلّي «الأمانة» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(2,'فكّر دقيقة: فين محتاج «الأمانة» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(2,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(2,'اسأل نفسك: لو «الأمانة» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(2,'يا رب، علّمني معنى «الأمانة» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(2,'يا رب، قلبي بين إيديك. خلّي «الأمانة» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(2,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «الأمانة». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(3,3,'Obedience','الطاعة');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(3,'«ينبغي أن يطاع الله أكثر من الناس»','أعمال ٥:٢٩');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(3,'«إن كنتم تحبونني فاحفظوا وصاياي»','يوحنا ١٤:١٥');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(3,'«طوبى للذين يسمعون كلام الله ويحفظونه»','لوقا ١١:٢٨');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(3,'«أطيعوا الله»','يعقوب ٤:٧');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(3,'«اسمعوا كلامي فأكون لكم إلهاً وأنتم تكونون لي شعباً»','إرميا ٧:٢٣');
+insert into message_variations(ornament_id,message_text) values(3,'يا صاحبي، الهدية دي عن «الطاعة». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(3,'مش صدفة إنك فتحت الهدية دي. «الطاعة» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(3,'وسط زحمة الأيام ربنا فاكرك. خلّي «الطاعة» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(3,'فكّر دقيقة: فين محتاج «الطاعة» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(3,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(3,'اسأل نفسك: لو «الطاعة» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(3,'يا رب، علّمني معنى «الطاعة» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(3,'يا رب، قلبي بين إيديك. خلّي «الطاعة» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(3,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «الطاعة». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(4,4,'Trust','الثقة في الله');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(4,'«توكل على الرب بكل قلبك، وعلى فهمك لا تعتمد»','أمثال ٣:٥');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(4,'«الرب نوري وخلاصي، ممن أخاف؟»','مزمور ٢٧:١');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(4,'«لا تخف لأني معك»','إشعياء ٤١:١٠');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(4,'«الرب راعيَّ فلا يعوزني شيء»','مزمور ٢٣:١');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(4,'«في يوم خوفي أنا عليك أتكل»','مزمور ٥٦:٣');
+insert into message_variations(ornament_id,message_text) values(4,'يا صاحبي، الهدية دي عن «الثقة في الله». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(4,'مش صدفة إنك فتحت الهدية دي. «الثقة في الله» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(4,'وسط زحمة الأيام ربنا فاكرك. خلّي «الثقة في الله» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(4,'فكّر دقيقة: فين محتاج «الثقة في الله» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(4,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(4,'اسأل نفسك: لو «الثقة في الله» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(4,'يا رب، علّمني معنى «الثقة في الله» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(4,'يا رب، قلبي بين إيديك. خلّي «الثقة في الله» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(4,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «الثقة في الله». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(5,5,'Depending on God','الاتكال على الله');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(5,'«ألقِ على الرب همك فهو يعولك»','مزمور ٥٥:٢٢');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(5,'«اطلبوا أولاً ملكوت الله وبره»','متى ٦:٣٣');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(5,'«استودع إلى الرب طريقك واتكل عليه وهو يجري»','مزمور ٣٧:٥');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(5,'«إلهي فيملأ كل احتياجكم بحسب غناه في المجد»','فيلبي ٤:١٩');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(5,'«اتكل على الرب وافعل الخير»','مزمور ٣٧:٣');
+insert into message_variations(ornament_id,message_text) values(5,'يا صاحبي، الهدية دي عن «الاتكال على الله». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(5,'مش صدفة إنك فتحت الهدية دي. «الاتكال على الله» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(5,'وسط زحمة الأيام ربنا فاكرك. خلّي «الاتكال على الله» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(5,'فكّر دقيقة: فين محتاج «الاتكال على الله» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(5,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(5,'اسأل نفسك: لو «الاتكال على الله» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(5,'يا رب، علّمني معنى «الاتكال على الله» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(5,'يا رب، قلبي بين إيديك. خلّي «الاتكال على الله» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(5,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «الاتكال على الله». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(6,6,'Fruits of the Spirit','ثمار الروح القدس');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(6,'«أنا الكرمة وأنتم الأغصان. الذي يثبت فيَّ وأنا فيه هذا يأتي بثمر كثير، لأنكم بدوني لا تقدرون أن تفعلوا شيئاً»','يوحنا ١٥:٥');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(6,'«بهذا يتمجد أبي: أن تأتوا بثمر كثير فتكونون تلاميذي»','يوحنا ١٥:٨');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(6,'«ليس أنتم اخترتموني بل أنا اخترتكم وأقمتكم لتذهبوا وتأتوا بثمر ويدوم ثمركم»','يوحنا ١٥:١٦');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(6,'«مملوئين من ثمر البر الذي بيسوع المسيح لمجد الله وحمده»','فيلبي ١:١١');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(6,'«وأما المزروع على الأرض الجيدة فهو الذي يسمع الكلمة ويفهم. وهو الذي يأتي بثمر فيصنع بعض مئة وآخر ستين وآخر ثلاثين»','متى ١٣:٢٣');
+insert into message_variations(ornament_id,message_text) values(6,'يا صاحبي، الهدية دي عن «ثمار الروح القدس». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(6,'مش صدفة إنك فتحت الهدية دي. «ثمار الروح القدس» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(6,'وسط زحمة الأيام ربنا فاكرك. خلّي «ثمار الروح القدس» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(6,'فكّر دقيقة: فين محتاج «ثمار الروح القدس» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(6,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(6,'اسأل نفسك: لو «ثمار الروح القدس» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(6,'يا رب، علّمني معنى «ثمار الروح القدس» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(6,'يا رب، قلبي بين إيديك. خلّي «ثمار الروح القدس» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(6,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «ثمار الروح القدس». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(7,7,'Work of the Holy Spirit','عمل الروح القدس');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(7,'«روح الحق يمكث معكم ويكون فيكم»','يوحنا ١٤:١٧');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(7,'«يعلمكم كل شيء ويذكركم بكل ما قلته لكم»','يوحنا ١٤:٢٦');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(7,'«حيث روح الرب هناك حرية»','٢ كورنثوس ٣:١٧');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(7,'«الروح أيضاً يعين ضعفاتنا»','رومية ٨:٢٦');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(7,'«تقبلون قوة متى حل الروح القدس عليكم»','أعمال ١:٨');
+insert into message_variations(ornament_id,message_text) values(7,'يا صاحبي، الهدية دي عن «عمل الروح القدس». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(7,'مش صدفة إنك فتحت الهدية دي. «عمل الروح القدس» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(7,'وسط زحمة الأيام ربنا فاكرك. خلّي «عمل الروح القدس» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(7,'فكّر دقيقة: فين محتاج «عمل الروح القدس» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(7,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(7,'اسأل نفسك: لو «عمل الروح القدس» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(7,'يا رب، علّمني معنى «عمل الروح القدس» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(7,'يا رب، قلبي بين إيديك. خلّي «عمل الروح القدس» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(7,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «عمل الروح القدس». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(8,8,'Joy','الفرح');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(8,'«افرحوا في الرب كل حين، وأقول أيضاً افرحوا»','فيلبي ٤:٤');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(8,'«هذا هو اليوم الذي صنعه الرب، نبتهج ونفرح فيه»','مزمور ١١٨:٢٤');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(8,'«فرح الرب هو قوتكم»','نحميا ٨:١٠');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(8,'«أما ثمر الروح فهو... فرح»','غلاطية ٥:٢٢');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(8,'«افرحوا مع الفرحين وابكوا مع الباكين»','رومية ١٢:١٥');
+insert into message_variations(ornament_id,message_text) values(8,'يا صاحبي، الهدية دي عن «الفرح». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(8,'مش صدفة إنك فتحت الهدية دي. «الفرح» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(8,'وسط زحمة الأيام ربنا فاكرك. خلّي «الفرح» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(8,'فكّر دقيقة: فين محتاج «الفرح» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(8,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(8,'اسأل نفسك: لو «الفرح» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(8,'يا رب، علّمني معنى «الفرح» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(8,'يا رب، قلبي بين إيديك. خلّي «الفرح» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(8,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «الفرح». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(9,9,'Peace','السلام والطمأنينة');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(9,'«سلامي أعطيكم. لا تضطرب قلوبكم ولا ترهب»','يوحنا ١٤:٢٧');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(9,'«سلام الله الذي يفوق كل عقل يحفظ قلوبكم وأفكاركم»','فيلبي ٤:٧');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(9,'«بالسلامة أضطجع بل أيضاً أنام»','مزمور ٤:٨');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(9,'«الرب يعطي عزاً لشعبه. الرب يبارك شعبه بالسلام»','مزمور ٢٩:١١');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(9,'«سلاماً أترك لكم. سلامي أعطيكم»','يوحنا ١٤:٢٧');
+insert into message_variations(ornament_id,message_text) values(9,'يا صاحبي، الهدية دي عن «السلام والطمأنينة». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(9,'مش صدفة إنك فتحت الهدية دي. «السلام والطمأنينة» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(9,'وسط زحمة الأيام ربنا فاكرك. خلّي «السلام والطمأنينة» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(9,'فكّر دقيقة: فين محتاج «السلام والطمأنينة» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(9,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(9,'اسأل نفسك: لو «السلام والطمأنينة» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(9,'يا رب، علّمني معنى «السلام والطمأنينة» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(9,'يا رب، قلبي بين إيديك. خلّي «السلام والطمأنينة» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(9,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «السلام والطمأنينة». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(10,10,'Gratitude','الشكر');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(10,'«اشكروا في كل شيء»','١ تسالونيكي ٥:١٨');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(10,'«احمدوا الرب لأنه صالح، لأن إلى الأبد رحمته»','مزمور ١٠٧:١');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(10,'«كل عطية صالحة وكل موهبة تامة هي من فوق»','يعقوب ١:١٧');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(10,'«باركي يا نفسي الرب، ولا تنسي كل حسناته»','مزمور ١٠٣:٢');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(10,'«مهما عملتم... فاعملوا الكل لمجد الله»','١ كورنثوس ١٠:٣١');
+insert into message_variations(ornament_id,message_text) values(10,'يا صاحبي، الهدية دي عن «الشكر». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(10,'مش صدفة إنك فتحت الهدية دي. «الشكر» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(10,'وسط زحمة الأيام ربنا فاكرك. خلّي «الشكر» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(10,'فكّر دقيقة: فين محتاج «الشكر» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(10,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(10,'اسأل نفسك: لو «الشكر» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(10,'يا رب، علّمني معنى «الشكر» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(10,'يا رب، قلبي بين إيديك. خلّي «الشكر» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(10,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «الشكر». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(11,11,'Forgiveness','الغفران والتسامح');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(11,'«كونوا لطفاء بعضكم نحو بعض، شفوقين متسامحين»','أفسس ٤:٣٢');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(11,'«كما غفر لكم المسيح هكذا أنتم أيضاً»','كولوسي ٣:١٣');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(11,'«اغفروا يغفر لكم»','لوقا ٦:٣٧');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(11,'«لا تنتقموا لأنفسكم أيها الأحباء»','رومية ١٢:١٩');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(11,'«المحبة تستر كل الذنوب»','أمثال ١٠:١٢');
+insert into message_variations(ornament_id,message_text) values(11,'يا صاحبي، الهدية دي عن «الغفران والتسامح». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(11,'مش صدفة إنك فتحت الهدية دي. «الغفران والتسامح» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(11,'وسط زحمة الأيام ربنا فاكرك. خلّي «الغفران والتسامح» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(11,'فكّر دقيقة: فين محتاج «الغفران والتسامح» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(11,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(11,'اسأل نفسك: لو «الغفران والتسامح» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(11,'يا رب، علّمني معنى «الغفران والتسامح» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(11,'يا رب، قلبي بين إيديك. خلّي «الغفران والتسامح» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(11,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «الغفران والتسامح». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(12,12,'Humility','التواضع والوداعة');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(12,'«تعلموا مني، لأني وديع ومتواضع القلب»','متى ١١:٢٩');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(12,'«تواضعوا قدام الرب فيرفعكم»','يعقوب ٤:١٠');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(12,'«بالتواضع حاسبين بعضكم البعض أفضل من أنفسهم»','فيلبي ٢:٣');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(12,'«الله يقاوم المستكبرين وأما المتواضعون فيعطيهم نعمة»','يعقوب ٤:٦');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(12,'«البسوا التواضع»','١ بطرس ٥:٥');
+insert into message_variations(ornament_id,message_text) values(12,'يا صاحبي، الهدية دي عن «التواضع والوداعة». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(12,'مش صدفة إنك فتحت الهدية دي. «التواضع والوداعة» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(12,'وسط زحمة الأيام ربنا فاكرك. خلّي «التواضع والوداعة» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(12,'فكّر دقيقة: فين محتاج «التواضع والوداعة» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(12,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(12,'اسأل نفسك: لو «التواضع والوداعة» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(12,'يا رب، علّمني معنى «التواضع والوداعة» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(12,'يا رب، قلبي بين إيديك. خلّي «التواضع والوداعة» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(12,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «التواضع والوداعة». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(13,13,'Prayer','الصلاة');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(13,'«صلوا بلا انقطاع»','١ تسالونيكي ٥:١٧');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(13,'«اسألوا تعطوا. اطلبوا تجدوا. اقرعوا يفتح لكم»','متى ٧:٧');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(13,'«قريب هو الرب من كل الذين يدعونه»','مزمور ١٤٥:١٨');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(13,'«ادعني فأجيبك»','إرميا ٣٣:٣');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(13,'«كل ما تطلبونه حينما تصلون فآمنوا أن تنالوه»','مرقس ١١:٢٤');
+insert into message_variations(ornament_id,message_text) values(13,'يا صاحبي، الهدية دي عن «الصلاة». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(13,'مش صدفة إنك فتحت الهدية دي. «الصلاة» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(13,'وسط زحمة الأيام ربنا فاكرك. خلّي «الصلاة» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(13,'فكّر دقيقة: فين محتاج «الصلاة» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(13,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(13,'اسأل نفسك: لو «الصلاة» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(13,'يا رب، علّمني معنى «الصلاة» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(13,'يا رب، قلبي بين إيديك. خلّي «الصلاة» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(13,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «الصلاة». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(14,14,'Hope','الرجاء');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(14,'«الرجاء لا يخزي»','رومية ٥:٥');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(14,'«تشدد وليتشجع قلبك وانتظر الرب»','مزمور ٢٧:١٤');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(14,'«مبارك الرجل الذي يتكل على الرب»','إرميا ١٧:٧');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(14,'«لأن عندك ينبوع الحياة. بنورك نرى نوراً»','مزمور ٣٦:٩');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(14,'«أنا عارف الأفكار التي أنا مفتكر بها عنكم... أفكار سلام لا شر»','إرميا ٢٩:١١');
+insert into message_variations(ornament_id,message_text) values(14,'يا صاحبي، الهدية دي عن «الرجاء». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(14,'مش صدفة إنك فتحت الهدية دي. «الرجاء» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(14,'وسط زحمة الأيام ربنا فاكرك. خلّي «الرجاء» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(14,'فكّر دقيقة: فين محتاج «الرجاء» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(14,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(14,'اسأل نفسك: لو «الرجاء» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(14,'يا رب، علّمني معنى «الرجاء» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(14,'يا رب، قلبي بين إيديك. خلّي «الرجاء» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(14,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «الرجاء». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(15,15,'Service','الخدمة والمحبة العملية');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(15,'«ليضيء نوركم هكذا قدام الناس»','متى ٥:١٦');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(15,'«مهما عملتم، فاعملوا من القلب كما للرب»','كولوسي ٣:٢٣');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(15,'«ابن الإنسان لم يأت ليُخدم بل ليَخدم»','متى ٢٠:٢٨');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(15,'«احملوا بعضكم أثقال بعض»','غلاطية ٦:٢');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(15,'«كل ما تريدون أن يفعل الناس بكم افعلوا هكذا أنتم أيضاً بهم»','متى ٧:١٢');
+insert into message_variations(ornament_id,message_text) values(15,'يا صاحبي، الهدية دي عن «الخدمة والمحبة العملية». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(15,'مش صدفة إنك فتحت الهدية دي. «الخدمة والمحبة العملية» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(15,'وسط زحمة الأيام ربنا فاكرك. خلّي «الخدمة والمحبة العملية» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(15,'فكّر دقيقة: فين محتاج «الخدمة والمحبة العملية» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(15,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(15,'اسأل نفسك: لو «الخدمة والمحبة العملية» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(15,'يا رب، علّمني معنى «الخدمة والمحبة العملية» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(15,'يا رب، قلبي بين إيديك. خلّي «الخدمة والمحبة العملية» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(15,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «الخدمة والمحبة العملية». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(16,16,'Wisdom','الحكمة والإرشاد');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(16,'«إنما إن كان أحدكم تعوزه حكمة فليطلب من الله»','يعقوب ١:٥');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(16,'«بداءة الحكمة مخافة الرب»','أمثال ٩:١٠');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(16,'«كلمتك مصباح لرجلي ونور لسبيلي»','مزمور ١١٩:١٠٥');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(16,'«أرشدك وأعلمك الطريق التي تسلكها»','مزمور ٣٢:٨');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(16,'«الحكيم يسمع فيزداد علماً»','أمثال ١:٥');
+insert into message_variations(ornament_id,message_text) values(16,'يا صاحبي، الهدية دي عن «الحكمة والإرشاد». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(16,'مش صدفة إنك فتحت الهدية دي. «الحكمة والإرشاد» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(16,'وسط زحمة الأيام ربنا فاكرك. خلّي «الحكمة والإرشاد» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(16,'فكّر دقيقة: فين محتاج «الحكمة والإرشاد» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(16,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(16,'اسأل نفسك: لو «الحكمة والإرشاد» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(16,'يا رب، علّمني معنى «الحكمة والإرشاد» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(16,'يا رب، قلبي بين إيديك. خلّي «الحكمة والإرشاد» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(16,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «الحكمة والإرشاد». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(17,17,'Strength','القوة والشجاعة');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(17,'«أستطيع كل شيء في المسيح الذي يقويني»','فيلبي ٤:١٣');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(17,'«تشدد وتشجع. لا ترهب ولا ترتعب»','يشوع ١:٩');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(17,'«الرب قوتي وترنيمتي، وقد صار خلاصي»','مزمور ١١٨:١٤');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(17,'«تكفيك نعمتي، لأن قوتي في الضعف تكمل»','٢ كورنثوس ١٢:٩');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(17,'«الله لم يعطنا روح الفشل بل روح القوة والمحبة والنصح»','٢ تيموثاوس ١:٧');
+insert into message_variations(ornament_id,message_text) values(17,'يا صاحبي، الهدية دي عن «القوة والشجاعة». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(17,'مش صدفة إنك فتحت الهدية دي. «القوة والشجاعة» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(17,'وسط زحمة الأيام ربنا فاكرك. خلّي «القوة والشجاعة» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(17,'فكّر دقيقة: فين محتاج «القوة والشجاعة» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(17,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(17,'اسأل نفسك: لو «القوة والشجاعة» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(17,'يا رب، علّمني معنى «القوة والشجاعة» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(17,'يا رب، قلبي بين إيديك. خلّي «القوة والشجاعة» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(17,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «القوة والشجاعة». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(18,18,'Purity','النقاوة والقداسة');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(18,'«وأما غاية الوصية فهي المحبة من قلب طاهر، وضمير صالح، وإيمان بلا رياء»','١ تيموثاوس ١:٥');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(18,'«لأننا نحن عمله، مخلوقين في المسيح يسوع لأعمال صالحة، قد سبق الله فأعدها لكي نسلك فيها»','أفسس ٢:١٠');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(18,'«لأن الله لم يدعنا للنجاسة بل في القداسة»','١ تسالونيكي ٤:٧');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(18,'«فوق كل تحفظ احفظ قلبك، لأن منه مخارج الحياة»','أمثال ٤:٢٣');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(18,'«اطلبوا السلام مع الجميع، والقداسة التي بدونها لن يرى أحد الرب»','عبرانيين ١٢:١٤');
+insert into message_variations(ornament_id,message_text) values(18,'يا صاحبي، الهدية دي عن «النقاوة والقداسة». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(18,'مش صدفة إنك فتحت الهدية دي. «النقاوة والقداسة» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(18,'وسط زحمة الأيام ربنا فاكرك. خلّي «النقاوة والقداسة» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(18,'فكّر دقيقة: فين محتاج «النقاوة والقداسة» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(18,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(18,'اسأل نفسك: لو «النقاوة والقداسة» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(18,'يا رب، علّمني معنى «النقاوة والقداسة» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(18,'يا رب، قلبي بين إيديك. خلّي «النقاوة والقداسة» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(18,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «النقاوة والقداسة». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(19,19,'Repentance','التوبة والرجوع إلى الله');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(19,'«قلباً نقياً اخلق فيَّ يا الله»','مزمور ٥١:١٠');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(19,'«ارجعوا إليَّ أرجع إليكم»','ملاخي ٣:٧');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(19,'«إن اعترفنا بخطايانا فهو أمين وعادل حتى يغفر لنا خطايانا»','١ يوحنا ١:٩');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(19,'«فرح يكون في السماء بخاطئ واحد يتوب»','لوقا ١٥:٧');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(19,'«قريب هو الرب من المنكسري القلوب»','مزمور ٣٤:١٨');
+insert into message_variations(ornament_id,message_text) values(19,'يا صاحبي، الهدية دي عن «التوبة والرجوع إلى الله». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(19,'مش صدفة إنك فتحت الهدية دي. «التوبة والرجوع إلى الله» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(19,'وسط زحمة الأيام ربنا فاكرك. خلّي «التوبة والرجوع إلى الله» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(19,'فكّر دقيقة: فين محتاج «التوبة والرجوع إلى الله» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(19,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(19,'اسأل نفسك: لو «التوبة والرجوع إلى الله» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(19,'يا رب، علّمني معنى «التوبة والرجوع إلى الله» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(19,'يا رب، قلبي بين إيديك. خلّي «التوبة والرجوع إلى الله» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(19,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «التوبة والرجوع إلى الله». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(20,20,'Life of Faith','مواضيع مختلفة');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(20,'«لأني قد اشتريتم بثمن. فمجدوا الله في أجسادكم وفي أرواحكم التي هي لله»','١ كورنثوس ٦:٢٠');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(20,'«لأننا بالإيمان نسلك لا بالعيان»','٢ كورنثوس ٥:٧');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(20,'«ليكن كلامكم كل حين بنعمة، مصلحًا بملح، لتعلموا كيف يجب أن تجاوبوا كل واحد»','كولوسي ٤:٦');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(20,'«أنا هو الأول وأنا الآخر، ولا إله غيري»','إشعياء ٤٤:٦');
+insert into message_variations(ornament_id,message_text) values(20,'يا صاحبي، الهدية دي عن «مواضيع مختلفة». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(20,'مش صدفة إنك فتحت الهدية دي. «مواضيع مختلفة» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(20,'وسط زحمة الأيام ربنا فاكرك. خلّي «مواضيع مختلفة» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(20,'فكّر دقيقة: فين محتاج «مواضيع مختلفة» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(20,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(20,'اسأل نفسك: لو «مواضيع مختلفة» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(20,'يا رب، علّمني معنى «مواضيع مختلفة» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(20,'يا رب، قلبي بين إيديك. خلّي «مواضيع مختلفة» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(20,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «مواضيع مختلفة». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(21,21,'God’s Promises','وعود الله');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(21,'«هل يقول ولا يفعل، أو يتكلم ولا يفي؟»','عدد ٢٣:١٩');
+insert into message_variations(ornament_id,message_text) values(21,'يا صاحبي، الهدية دي عن «وعود الله». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(21,'مش صدفة إنك فتحت الهدية دي. «وعود الله» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(21,'وسط زحمة الأيام ربنا فاكرك. خلّي «وعود الله» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(21,'فكّر دقيقة: فين محتاج «وعود الله» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(21,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(21,'اسأل نفسك: لو «وعود الله» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(21,'يا رب، علّمني معنى «وعود الله» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(21,'يا رب، قلبي بين إيديك. خلّي «وعود الله» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(21,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «وعود الله». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(22,22,'The Annunciation','البشارة');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(22,'«هوذا أنا أمة الرب. ليكن لي كقولك»','لوقا ١:٣٨');
+insert into message_variations(ornament_id,message_text) values(22,'يا صاحبي، الهدية دي عن «البشارة». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(22,'مش صدفة إنك فتحت الهدية دي. «البشارة» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(22,'وسط زحمة الأيام ربنا فاكرك. خلّي «البشارة» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(22,'فكّر دقيقة: فين محتاج «البشارة» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(22,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(22,'اسأل نفسك: لو «البشارة» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(22,'يا رب، علّمني معنى «البشارة» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(22,'يا رب، قلبي بين إيديك. خلّي «البشارة» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(22,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «البشارة». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(23,23,'The Journey','الرحلة');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(23,'«لأننا رأينا نجمه في المشرق وأتينا لنسجد له»','متى ٢:٢');
+insert into message_variations(ornament_id,message_text) values(23,'يا صاحبي، الهدية دي عن «الرحلة». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(23,'مش صدفة إنك فتحت الهدية دي. «الرحلة» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(23,'وسط زحمة الأيام ربنا فاكرك. خلّي «الرحلة» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(23,'فكّر دقيقة: فين محتاج «الرحلة» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(23,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(23,'اسأل نفسك: لو «الرحلة» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(23,'يا رب، علّمني معنى «الرحلة» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(23,'يا رب، قلبي بين إيديك. خلّي «الرحلة» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(23,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «الرحلة». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(24,24,'The Birth of Christ','ميلاد المسيح');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(24,'«أنه ولد لكم اليوم في مدينة داود مخلص هو المسيح الرب»','لوقا ٢:١١');
+insert into message_variations(ornament_id,message_text) values(24,'يا صاحبي، الهدية دي عن «ميلاد المسيح». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(24,'مش صدفة إنك فتحت الهدية دي. «ميلاد المسيح» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(24,'وسط زحمة الأيام ربنا فاكرك. خلّي «ميلاد المسيح» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(24,'فكّر دقيقة: فين محتاج «ميلاد المسيح» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(24,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(24,'اسأل نفسك: لو «ميلاد المسيح» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(24,'يا رب، علّمني معنى «ميلاد المسيح» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(24,'يا رب، قلبي بين إيديك. خلّي «ميلاد المسيح» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(24,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «ميلاد المسيح». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(25,25,'God With Us','عمانوئيل');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(25,'«ويدعون اسمه عمانوئيل الذي تفسيره: الله معنا»','متى ١:٢٣');
+insert into message_variations(ornament_id,message_text) values(25,'يا صاحبي، الهدية دي عن «عمانوئيل». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(25,'مش صدفة إنك فتحت الهدية دي. «عمانوئيل» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(25,'وسط زحمة الأيام ربنا فاكرك. خلّي «عمانوئيل» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(25,'فكّر دقيقة: فين محتاج «عمانوئيل» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(25,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(25,'اسأل نفسك: لو «عمانوئيل» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(25,'يا رب، علّمني معنى «عمانوئيل» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(25,'يا رب، قلبي بين إيديك. خلّي «عمانوئيل» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(25,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «عمانوئيل». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(26,26,'The Light','النور');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(26,'«والنور يضيء في الظلمة، والظلمة لم تدركه»','يوحنا ١:٥');
+insert into message_variations(ornament_id,message_text) values(26,'يا صاحبي، الهدية دي عن «النور». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(26,'مش صدفة إنك فتحت الهدية دي. «النور» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(26,'وسط زحمة الأيام ربنا فاكرك. خلّي «النور» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(26,'فكّر دقيقة: فين محتاج «النور» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(26,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(26,'اسأل نفسك: لو «النور» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(26,'يا رب، علّمني معنى «النور» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(26,'يا رب، قلبي بين إيديك. خلّي «النور» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(26,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «النور». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(27,27,'The Word Made Flesh','الكلمة صار جسداً');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(27,'«والكلمة صار جسداً وحل بيننا»','يوحنا ١:١٤');
+insert into message_variations(ornament_id,message_text) values(27,'يا صاحبي، الهدية دي عن «الكلمة صار جسداً». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(27,'مش صدفة إنك فتحت الهدية دي. «الكلمة صار جسداً» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(27,'وسط زحمة الأيام ربنا فاكرك. خلّي «الكلمة صار جسداً» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(27,'فكّر دقيقة: فين محتاج «الكلمة صار جسداً» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(27,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(27,'اسأل نفسك: لو «الكلمة صار جسداً» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(27,'يا رب، علّمني معنى «الكلمة صار جسداً» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(27,'يا رب، قلبي بين إيديك. خلّي «الكلمة صار جسداً» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(27,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «الكلمة صار جسداً». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(28,28,'Prince of Peace','رئيس السلام');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(28,'«ويدعى اسمه عجيباً، مشيراً، إلهاً قديراً، أباً أبدياً، رئيس السلام»','إشعياء ٩:٦');
+insert into message_variations(ornament_id,message_text) values(28,'يا صاحبي، الهدية دي عن «رئيس السلام». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(28,'مش صدفة إنك فتحت الهدية دي. «رئيس السلام» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(28,'وسط زحمة الأيام ربنا فاكرك. خلّي «رئيس السلام» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(28,'فكّر دقيقة: فين محتاج «رئيس السلام» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(28,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(28,'اسأل نفسك: لو «رئيس السلام» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(28,'يا رب، علّمني معنى «رئيس السلام» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(28,'يا رب، قلبي بين إيديك. خلّي «رئيس السلام» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(28,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «رئيس السلام». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(29,29,'New Beginnings','بداية جديدة');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(29,'«إن كان أحد في المسيح فهو خليقة جديدة. الأشياء العتيقة قد مضت، هوذا الكل قد صار جديداً»','٢ كورنثوس ٥:١٧');
+insert into message_variations(ornament_id,message_text) values(29,'يا صاحبي، الهدية دي عن «بداية جديدة». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(29,'مش صدفة إنك فتحت الهدية دي. «بداية جديدة» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(29,'وسط زحمة الأيام ربنا فاكرك. خلّي «بداية جديدة» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(29,'فكّر دقيقة: فين محتاج «بداية جديدة» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(29,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(29,'اسأل نفسك: لو «بداية جديدة» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(29,'يا رب، علّمني معنى «بداية جديدة» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(29,'يا رب، قلبي بين إيديك. خلّي «بداية جديدة» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(29,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «بداية جديدة». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(30,30,'Open the Door','افتح الباب');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(30,'«هنذا واقف على الباب وأقرع. إن سمع أحد صوتي وفتح الباب أدخل إليه»','رؤيا ٣:٢٠');
+insert into message_variations(ornament_id,message_text) values(30,'يا صاحبي، الهدية دي عن «افتح الباب». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(30,'مش صدفة إنك فتحت الهدية دي. «افتح الباب» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(30,'وسط زحمة الأيام ربنا فاكرك. خلّي «افتح الباب» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(30,'فكّر دقيقة: فين محتاج «افتح الباب» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(30,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(30,'اسأل نفسك: لو «افتح الباب» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(30,'يا رب، علّمني معنى «افتح الباب» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(30,'يا رب، قلبي بين إيديك. خلّي «افتح الباب» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(30,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «افتح الباب». آمين.');
+insert into ornaments(id,n,title_en,title_ar) values(31,31,'THE GREATEST GIFT WAS NEVER UNDER THE TREE.','الهدية الأعظم');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(31,'«لأنه هكذا أحب الله العالم حتى بذل ابنه الوحيد، لكي لا يهلك كل من يؤمن به، بل تكون له الحياة الأبدية»','يوحنا ٣:١٦');
+insert into bible_verses(ornament_id,verse_text,bible_reference) values(31,'«لأن أجرة الخطية هي موت، وأما هبة الله فهي حياة أبدية بالمسيح يسوع ربنا»','رومية ٦:٢٣');
+insert into message_variations(ornament_id,message_text) values(31,'يا صاحبي، الهدية دي عن «الهدية الأعظم». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.');
+insert into message_variations(ornament_id,message_text) values(31,'مش صدفة إنك فتحت الهدية دي. «الهدية الأعظم» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.');
+insert into message_variations(ornament_id,message_text) values(31,'وسط زحمة الأيام ربنا فاكرك. خلّي «الهدية الأعظم» سند ليك وهدوء في قلبك النهارده.');
+insert into reflections(ornament_id,reflection_text) values(31,'فكّر دقيقة: فين محتاج «الهدية الأعظم» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟');
+insert into reflections(ornament_id,reflection_text) values(31,'اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟');
+insert into reflections(ornament_id,reflection_text) values(31,'اسأل نفسك: لو «الهدية الأعظم» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟');
+insert into prayers(ornament_id,prayer_text) values(31,'يا رب، علّمني معنى «الهدية الأعظم» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.');
+insert into prayers(ornament_id,prayer_text) values(31,'يا رب، قلبي بين إيديك. خلّي «الهدية الأعظم» يكبر جوايا يوم بعد يوم. آمين.');
+insert into prayers(ornament_id,prayer_text) values(31,'يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «الهدية الأعظم». آمين.');</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+const D=[{"ar": "محبة", "v": [["«الله محبة»", "١ يوحنا ٤:٨"], ["«لتصر كل أموركم في محبة»", "١ كورنثوس ١٦:١٤"], ["«المحبة تتأنى وترفق»", "١ كورنثوس ١٣:٤"], ["«المحبة لا تسقط أبداً»", "١ كورنثوس ١٣:٨"], ["«بهذا يعرف الجميع أنكم تلاميذي: إن كان لكم حب بعضاً لبعض»", "يوحنا ١٣:٣٥"]], "n": 1, "en": "God’s Love"}, {"ar": "الأمانة", "v": [["«كن أميناً إلى الموت فسأعطيك إكليل الحياة»", "رؤيا ٢:١٠"], ["«الأمين في القليل أمين أيضاً في الكثير»", "لوقا ١٦:١٠"], ["«حسناً أيها العبد الصالح والأمين»", "متى ٢٥:٢١"], ["«وأما المطلوب في الوكلاء فهو أن يوجد الإنسان أميناً»", "١ كورنثوس ٤:٢"], ["«ليكن كل واحد كما أخذ موهبة يخدم بها بعضكم بعضاً»", "١ بطرس ٤:١٠"]], "n": 2, "en": "Faithfulness"}, {"ar": "الطاعة", "v": [["«ينبغي أن يطاع الله أكثر من الناس»", "أعمال ٥:٢٩"], ["«إن كنتم تحبونني فاحفظوا وصاياي»", "يوحنا ١٤:١٥"], ["«طوبى للذين يسمعون كلام الله ويحفظونه»", "لوقا ١١:٢٨"], ["«أطيعوا الله»", "يعقوب ٤:٧"], ["«اسمعوا كلامي فأكون لكم إلهاً وأنتم تكونون لي شعباً»", "إرميا ٧:٢٣"]], "n": 3, "en": "Obedience"}, {"ar": "الثقة في الله", "v": [["«توكل على الرب بكل قلبك، وعلى فهمك لا تعتمد»", "أمثال ٣:٥"], ["«الرب نوري وخلاصي، ممن أخاف؟»", "مزمور ٢٧:١"], ["«لا تخف لأني معك»", "إشعياء ٤١:١٠"], ["«الرب راعيَّ فلا يعوزني شيء»", "مزمور ٢٣:١"], ["«في يوم خوفي أنا عليك أتكل»", "مزمور ٥٦:٣"]], "n": 4, "en": "Trust"}, {"ar": "الاتكال على الله", "v": [["«ألقِ على الرب همك فهو يعولك»", "مزمور ٥٥:٢٢"], ["«اطلبوا أولاً ملكوت الله وبره»", "متى ٦:٣٣"], ["«استودع إلى الرب طريقك واتكل عليه وهو يجري»", "مزمور ٣٧:٥"], ["«إلهي فيملأ كل احتياجكم بحسب غناه في المجد»", "فيلبي ٤:١٩"], ["«اتكل على الرب وافعل الخير»", "مزمور ٣٧:٣"]], "n": 5, "en": "Depending on God"}, {"ar": "ثمار الروح القدس", "v": [["«أنا الكرمة وأنتم الأغصان. الذي يثبت فيَّ وأنا فيه هذا يأتي بثمر كثير، لأنكم بدوني لا تقدرون أن تفعلوا شيئاً»", "يوحنا ١٥:٥"], ["«بهذا يتمجد أبي: أن تأتوا بثمر كثير فتكونون تلاميذي»", "يوحنا ١٥:٨"], ["«ليس أنتم اخترتموني بل أنا اخترتكم وأقمتكم لتذهبوا وتأتوا بثمر ويدوم ثمركم»", "يوحنا ١٥:١٦"], ["«مملوئين من ثمر البر الذي بيسوع المسيح لمجد الله وحمده»", "فيلبي ١:١١"], ["«وأما المزروع على الأرض الجيدة فهو الذي يسمع الكلمة ويفهم. وهو الذي يأتي بثمر فيصنع بعض مئة وآخر ستين وآخر ثلاثين»", "متى ١٣:٢٣"]], "n": 6, "en": "Fruits of the Spirit"}, {"ar": "عمل الروح القدس", "v": [["«روح الحق يمكث معكم ويكون فيكم»", "يوحنا ١٤:١٧"], ["«يعلمكم كل شيء ويذكركم بكل ما قلته لكم»", "يوحنا ١٤:٢٦"], ["«حيث روح الرب هناك حرية»", "٢ كورنثوس ٣:١٧"], ["«الروح أيضاً يعين ضعفاتنا»", "رومية ٨:٢٦"], ["«تقبلون قوة متى حل الروح القدس عليكم»", "أعمال ١:٨"]], "n": 7, "en": "Work of the Holy Spirit"}, {"ar": "الفرح", "v": [["«افرحوا في الرب كل حين، وأقول أيضاً افرحوا»", "فيلبي ٤:٤"], ["«هذا هو اليوم الذي صنعه الرب، نبتهج ونفرح فيه»", "مزمور ١١٨:٢٤"], ["«فرح الرب هو قوتكم»", "نحميا ٨:١٠"], ["«أما ثمر الروح فهو... فرح»", "غلاطية ٥:٢٢"], ["«افرحوا مع الفرحين وابكوا مع الباكين»", "رومية ١٢:١٥"]], "n": 8, "en": "Joy"}, {"ar": "السلام والطمأنينة", "v": [["«سلامي أعطيكم. لا تضطرب قلوبكم ولا ترهب»", "يوحنا ١٤:٢٧"], ["«سلام الله الذي يفوق كل عقل يحفظ قلوبكم وأفكاركم»", "فيلبي ٤:٧"], ["«بالسلامة أضطجع بل أيضاً أنام»", "مزمور ٤:٨"], ["«الرب يعطي عزاً لشعبه. الرب يبارك شعبه بالسلام»", "مزمور ٢٩:١١"], ["«سلاماً أترك لكم. سلامي أعطيكم»", "يوحنا ١٤:٢٧"]], "n": 9, "en": "Peace"}, {"ar": "الشكر", "v": [["«اشكروا في كل شيء»", "١ تسالونيكي ٥:١٨"], ["«احمدوا الرب لأنه صالح، لأن إلى الأبد رحمته»", "مزمور ١٠٧:١"], ["«كل عطية صالحة وكل موهبة تامة هي من فوق»", "يعقوب ١:١٧"], ["«باركي يا نفسي الرب، ولا تنسي كل حسناته»", "مزمور ١٠٣:٢"], ["«مهما عملتم... فاعملوا الكل لمجد الله»", "١ كورنثوس ١٠:٣١"]], "n": 10, "en": "Gratitude"}, {"ar": "الغفران والتسامح", "v": [["«كونوا لطفاء بعضكم نحو بعض، شفوقين متسامحين»", "أفسس ٤:٣٢"], ["«كما غفر لكم المسيح هكذا أنتم أيضاً»", "كولوسي ٣:١٣"], ["«اغفروا يغفر لكم»", "لوقا ٦:٣٧"], ["«لا تنتقموا لأنفسكم أيها الأحباء»", "رومية ١٢:١٩"], ["«المحبة تستر كل الذنوب»", "أمثال ١٠:١٢"]], "n": 11, "en": "Forgiveness"}, {"ar": "التواضع والوداعة", "v": [["«تعلموا مني، لأني وديع ومتواضع القلب»", "متى ١١:٢٩"], ["«تواضعوا قدام الرب فيرفعكم»", "يعقوب ٤:١٠"], ["«بالتواضع حاسبين بعضكم البعض أفضل من أنفسهم»", "فيلبي ٢:٣"], ["«الله يقاوم المستكبرين وأما المتواضعون فيعطيهم نعمة»", "يعقوب ٤:٦"], ["«البسوا التواضع»", "١ بطرس ٥:٥"]], "n": 12, "en": "Humility"}, {"ar": "الصلاة", "v": [["«صلوا بلا انقطاع»", "١ تسالونيكي ٥:١٧"], ["«اسألوا تعطوا. اطلبوا تجدوا. اقرعوا يفتح لكم»", "متى ٧:٧"], ["«قريب هو الرب من كل الذين يدعونه»", "مزمور ١٤٥:١٨"], ["«ادعني فأجيبك»", "إرميا ٣٣:٣"], ["«كل ما تطلبونه حينما تصلون فآمنوا أن تنالوه»", "مرقس ١١:٢٤"]], "n": 13, "en": "Prayer"}, {"ar": "الرجاء", "v": [["«الرجاء لا يخزي»", "رومية ٥:٥"], ["«تشدد وليتشجع قلبك وانتظر الرب»", "مزمور ٢٧:١٤"], ["«مبارك الرجل الذي يتكل على الرب»", "إرميا ١٧:٧"], ["«لأن عندك ينبوع الحياة. بنورك نرى نوراً»", "مزمور ٣٦:٩"], ["«أنا عارف الأفكار التي أنا مفتكر بها عنكم... أفكار سلام لا شر»", "إرميا ٢٩:١١"]], "n": 14, "en": "Hope"}, {"ar": "الخدمة والمحبة العملية", "v": [["«ليضيء نوركم هكذا قدام الناس»", "متى ٥:١٦"], ["«مهما عملتم، فاعملوا من القلب كما للرب»", "كولوسي ٣:٢٣"], ["«ابن الإنسان لم يأت ليُخدم بل ليَخدم»", "متى ٢٠:٢٨"], ["«احملوا بعضكم أثقال بعض»", "غلاطية ٦:٢"], ["«كل ما تريدون أن يفعل الناس بكم افعلوا هكذا أنتم أيضاً بهم»", "متى ٧:١٢"]], "n": 15, "en": "Service"}, {"ar": "الحكمة والإرشاد", "v": [["«إنما إن كان أحدكم تعوزه حكمة فليطلب من الله»", "يعقوب ١:٥"], ["«بداءة الحكمة مخافة الرب»", "أمثال ٩:١٠"], ["«كلمتك مصباح لرجلي ونور لسبيلي»", "مزمور ١١٩:١٠٥"], ["«أرشدك وأعلمك الطريق التي تسلكها»", "مزمور ٣٢:٨"], ["«الحكيم يسمع فيزداد علماً»", "أمثال ١:٥"]], "n": 16, "en": "Wisdom"}, {"ar": "القوة والشجاعة", "v": [["«أستطيع كل شيء في المسيح الذي يقويني»", "فيلبي ٤:١٣"], ["«تشدد وتشجع. لا ترهب ولا ترتعب»", "يشوع ١:٩"], ["«الرب قوتي وترنيمتي، وقد صار خلاصي»", "مزمور ١١٨:١٤"], ["«تكفيك نعمتي، لأن قوتي في الضعف تكمل»", "٢ كورنثوس ١٢:٩"], ["«الله لم يعطنا روح الفشل بل روح القوة والمحبة والنصح»", "٢ تيموثاوس ١:٧"]], "n": 17, "en": "Strength"}, {"ar": "النقاوة والقداسة", "v": [["«وأما غاية الوصية فهي المحبة من قلب طاهر، وضمير صالح، وإيمان بلا رياء»", "١ تيموثاوس ١:٥"], ["«لأننا نحن عمله، مخلوقين في المسيح يسوع لأعمال صالحة، قد سبق الله فأعدها لكي نسلك فيها»", "أفسس ٢:١٠"], ["«لأن الله لم يدعنا للنجاسة بل في القداسة»", "١ تسالونيكي ٤:٧"], ["«فوق كل تحفظ احفظ قلبك، لأن منه مخارج الحياة»", "أمثال ٤:٢٣"], ["«اطلبوا السلام مع الجميع، والقداسة التي بدونها لن يرى أحد الرب»", "عبرانيين ١٢:١٤"]], "n": 18, "en": "Purity"}, {"ar": "التوبة والرجوع إلى الله", "v": [["«قلباً نقياً اخلق فيَّ يا الله»", "مزمور ٥١:١٠"], ["«ارجعوا إليَّ أرجع إليكم»", "ملاخي ٣:٧"], ["«إن اعترفنا بخطايانا فهو أمين وعادل حتى يغفر لنا خطايانا»", "١ يوحنا ١:٩"], ["«فرح يكون في السماء بخاطئ واحد يتوب»", "لوقا ١٥:٧"], ["«قريب هو الرب من المنكسري القلوب»", "مزمور ٣٤:١٨"]], "n": 19, "en": "Repentance"}, {"ar": "مواضيع مختلفة", "v": [["«لأني قد اشتريتم بثمن. فمجدوا الله في أجسادكم وفي أرواحكم التي هي لله»", "١ كورنثوس ٦:٢٠"], ["«لأننا بالإيمان نسلك لا بالعيان»", "٢ كورنثوس ٥:٧"], ["«ليكن كلامكم كل حين بنعمة، مصلحًا بملح، لتعلموا كيف يجب أن تجاوبوا كل واحد»", "كولوسي ٤:٦"], ["«أنا هو الأول وأنا الآخر، ولا إله غيري»", "إشعياء ٤٤:٦"]], "n": 20, "en": "Life of Faith"}, {"ar": "وعود الله", "v": [["«هل يقول ولا يفعل، أو يتكلم ولا يفي؟»", "عدد ٢٣:١٩"]], "n": 21, "en": "God’s Promises"}, {"ar": "البشارة", "v": [["«هوذا أنا أمة الرب. ليكن لي كقولك»", "لوقا ١:٣٨"]], "n": 22, "en": "The Annunciation"}, {"ar": "الرحلة", "v": [["«لأننا رأينا نجمه في المشرق وأتينا لنسجد له»", "متى ٢:٢"]], "n": 23, "en": "The Journey"}, {"ar": "ميلاد المسيح", "v": [["«أنه ولد لكم اليوم في مدينة داود مخلص هو المسيح الرب»", "لوقا ٢:١١"]], "n": 24, "en": "The Birth of Christ"}, {"ar": "عمانوئيل", "v": [["«ويدعون اسمه عمانوئيل الذي تفسيره: الله معنا»", "متى ١:٢٣"]], "n": 25, "en": "God With Us"}, {"ar": "النور", "v": [["«والنور يضيء في الظلمة، والظلمة لم تدركه»", "يوحنا ١:٥"]], "n": 26, "en": "The Light"}, {"ar": "الكلمة صار جسداً", "v": [["«والكلمة صار جسداً وحل بيننا»", "يوحنا ١:١٤"]], "n": 27, "en": "The Word Made Flesh"}, {"ar": "رئيس السلام", "v": [["«ويدعى اسمه عجيباً، مشيراً، إلهاً قديراً، أباً أبدياً، رئيس السلام»", "إشعياء ٩:٦"]], "n": 28, "en": "Prince of Peace"}, {"ar": "بداية جديدة", "v": [["«إن كان أحد في المسيح فهو خليقة جديدة. الأشياء العتيقة قد مضت، هوذا الكل قد صار جديداً»", "٢ كورنثوس ٥:١٧"]], "n": 29, "en": "New Beginnings"}, {"ar": "افتح الباب", "v": [["«هنذا واقف على الباب وأقرع. إن سمع أحد صوتي وفتح الباب أدخل إليه»", "رؤيا ٣:٢٠"]], "n": 30, "en": "Open the Door"}, {"ar": "الهدية الأعظم", "v": [["«لأنه هكذا أحب الله العالم حتى بذل ابنه الوحيد، لكي لا يهلك كل من يؤمن به، بل تكون له الحياة الأبدية»", "يوحنا ٣:١٦"], ["«لأن أجرة الخطية هي موت، وأما هبة الله فهي حياة أبدية بالمسيح يسوع ربنا»", "رومية ٦:٢٣"]], "n": 31, "en": "THE GREATEST GIFT WAS NEVER UNDER THE TREE."}];
+const SB_URL='',SB_KEY='';/* fill both to switch from demo mode to Supabase */
+const TESTING_MODE=true;/* only opens all 31 ornaments; never disables the one-time rule */
+const M=["يا صاحبي، الهدية دي عن «{t}». ربنا شايفك ومش بعيد عنك، وكلمته النهارده بتطمنك إنك مش لوحدك.","مش صدفة إنك فتحت الهدية دي. «{t}» رسالة من ربنا ليك: خطوة صغيرة النهارده كفاية، وهو هيكمل معاك.","وسط زحمة الأيام ربنا فاكرك. خلّي «{t}» سند ليك وهدوء في قلبك النهارده."];
+const R=["فكّر دقيقة: فين محتاج «{t}» أكتر في حياتك الأسبوع ده؟ وإيه خطوة بسيطة تعملها؟","اقرأ الآية تاني بهدوء. إيه الكلمة اللي لمستك؟ وإزاي تعيشها النهارده؟","اسأل نفسك: لو «{t}» كان حاضر أكتر في يومي، إيه اللي كان هيتغير؟"];
+const P=["يا رب، علّمني معنى «{t}» بجد، وساعدني أعيشه في الصغير قبل الكبير. آمين.","يا رب، قلبي بين إيديك. خلّي «{t}» يكبر جوايا يوم بعد يوم. آمين.","يا رب، شكراً إنك بتتكلم معايا. ساعدني أسمعك وأمشي وراك في «{t}». آمين."];
+const $=s=>document.querySelector(s),pick=a=>a[Math.random()*a.length|0],fill=(s,t)=>s.replace('{t}',t);
+const K='dwj_demo_v1';let mem={},sb=null,bank=[];
+const ls={g(){try{return JSON.parse(localStorage.getItem(K))||mem}catch(e){return mem}},s(o){mem=o;try{localStorage.setItem(K,JSON.stringify(o))}catch(e){}}};
+const api={
+async init(){if(SB_URL&&window.supabase){sb=supabase.createClient(SB_URL,SB_KEY);const{data}=await sb.auth.getSession();if(!data.session)await sb.auth.signInAnonymously();await sb.rpc('register_anonymous_visitor')}},
+async bank(){if(sb){const{data,error}=await sb.rpc('get_gift_bank');if(error)throw error;return data||[]}return Object.values(ls.g())},
+async open(n){if(sb){const{data,error}=await sb.rpc('open_ornament_once',{p_number:n});if(error)throw error;return data}
+const o=ls.g();if(o[n])return{status:'ALREADY_RECEIVED'};
+const t=D[n-1],v=pick(t.v),g={n,en:t.en,ar:t.ar,verse:v[0],ref:v[1],msg:fill(pick(M),t.ar),refl:fill(pick(R),t.ar),prayer:fill(pick(P),t.ar),at:new Date().toISOString()};
+o[n]=g;ls.s(o);return{status:'OPENED',gift:g}}};
+const fd=s=>new Date(s).toLocaleString(undefined,{year:'numeric',month:'long',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+const ov=h=>{$('#ovc').innerHTML=h;$('#ov').hidden=false;$('#ov').scrollTop=0},cl=()=>$('#ov').hidden=true;
+function tree(){const got=new Set(bank.map(g=>+g.n)),C=['#d4af37','#b3202f','#f3e3b3','#1f8f63'];
+let h='<polygon points="200,45 95,215 305,215" fill="#0b3d2e"/><polygon points="200,115 60,310 340,310" fill="#0e4d39"/><polygon points="200,190 30,430 370,430" fill="#115c43"/><rect x="185" y="430" width="30" height="34" fill="#4a2f1a"/><text x="200" y="38" font-size="34" text-anchor="middle" fill="#ffd98a" style="filter:drop-shadow(0 0 8px #d4af37)">★</text>',n=1;
+[3,4,5,6,6,7].forEach((c,r)=>{const w=80+r*34,y=125+r*52;for(let i=0;i<c;i++,n++){const x=200+(i-(c-1)/2)*(c>1?w/(c-1):0),k=got.has(n);
+h+=`<g class="orn ${k?'got':''}" data-n="${n}" tabindex="0" role="button" aria-label="Ornament ${n}${k?' received':''}"><circle cx="${x}" cy="${y}" r="18" fill="transparent"/><circle class="b" cx="${x}" cy="${y}" r="14" fill="${C[n%4]}"/><text x="${x}" y="${y+4}" font-size="11" font-weight="700" text-anchor="middle" fill="#070d1f" pointer-events="none">${n}</text>${k?`<text x="${x+10}" y="${y-8}" font-size="11" fill="#ffd98a" pointer-events="none">✓</text>`:''}</g>`}});
+$('#tree').innerHTML=h;const c=got.size;$('#pg').textContent=`YOUR JOURNEY · ${c} / 31 GIFTS COLLECTED`;$('#pf').style.width=c/31*100+'%'}
+async function refresh(){try{bank=await api.bank()}catch(e){bank=[]}tree()}
+const giftHTML=(g,fresh)=>`<div class="c"><p class="tag">DAY ${String(g.n).padStart(2,'0')} — ${g.en.toUpperCase()}</p><p class="ar c" style="text-align:center">${g.ar}</p><p class="sm">Received: ${fd(g.at)}</p></div>
+<div class="card"><h4>GOD’S WORD</h4><p class="ar">${g.verse}<br><b>${g.ref}</b></p></div>
+<div class="card"><h4>A PERSONAL MESSAGE</h4><p class="ar">${g.msg}</p></div>
+<div class="card"><h4>A MOMENT TO REFLECT</h4><p class="ar">${g.refl}</p></div>
+<div class="card"><h4>A LITTLE PRAYER</h4><p class="ar">${g.prayer}</p></div>
+<div class="row">${fresh?'<button id="sv">SAVE IN MY GIFT BANK</button>':''}<button id="sh">SHARE THE LOVE</button><button class="ghost" id="x">${fresh?'BACK TO THE TREE':'BACK'}</button></div>`;
+function showGift(g,fresh,back){ov(giftHTML(g,fresh));$('#x').onclick=back||cl;
+if($('#sv'))$('#sv').onclick=()=>{$('#sv').textContent='✓ SAVED IN YOUR GIFT BANK';$('#sv').disabled=true};
+$('#sh').onclick=async()=>{const t=`${g.verse} — ${g.ref}\n\nDecember With Jesus · Day ${g.n}`;try{navigator.share?await navigator.share({text:t}):(await navigator.clipboard.writeText(t),$('#sh').textContent='COPIED ✓')}catch(e){}}}
+function showBank(sort='n'){const a=[...bank].sort((x,y)=>sort==='n'?x.n-y.n:new Date(y.at)-new Date(x.at)),got=new Set(a.map(g=>+g.n));
+if(!a.length)return ov(`<div class="c"><h2 class="tag">MY GIFT BANK</h2><p class="ar c" style="text-align:center">لسه بنك الهدايا بتاعك فاضي... مستني أول هدية تستلمها؟</p><button id="x">START COLLECTING</button></div>`),$('#x').onclick=cl;
+ov(`<div class="c"><h2 class="tag">‹ GIFT BANK ›</h2><p>YOUR PERSONAL COLLECTION</p><p class="ar c" style="text-align:center">كل هدية استلمتها... وكل كلمة فضلت معاك.</p><p class="prog">${a.length} / 31 GIFTS COLLECTED</p><div class="pb"><i style="width:${a.length/31*100}%"></i></div>
+<div class="row"><select id="st"><option value="n">Sort: ornament number</option><option value="d">Sort: date received</option></select><button class="ghost" id="x">CLOSE</button></div></div>
+<div class="grid">${a.map(g=>`<div class="card mini" data-n="${g.n}"><h4>DAY ${String(g.n).padStart(2,'0')} — ${g.en.toUpperCase()}</h4><p class="sm">✓ Received ${fd(g.at)}</p></div>`).join('')}</div>
+<p class="sm c">Still available: ${[...Array(31)].map((_,i)=>i+1).filter(n=>!got.has(n)).join(', ')||'none — all collected!'}</p>`);
+$('#st').value=sort;$('#st').onchange=e=>showBank(e.target.value);$('#x').onclick=cl;
+document.querySelectorAll('.mini').forEach(el=>el.onclick=()=>showGift(bank.find(g=>g.n==el.dataset.n),false,()=>showBank(sort)))}
+let busy=false;
+async function openOrn(n){if(busy)return;busy=true;try{const r=await api.open(n);
+if(r.status==='OPENED'){await refresh();showGift(r.gift,true)}
+else ov(`<div class="c card"><h4>THIS GIFT HAS ALREADY BEEN RECEIVED.</h4><p class="ar c" style="text-align:center">الهدية دي وصلتك بالفعل... هتلاقيها محفوظة في بنك الهدايا بتاعك.</p><div class="row"><button id="gb">OPEN MY GIFT BANK</button><button class="ghost" id="x">CLOSE</button></div></div>`),$('#gb').onclick=()=>showBank(),$('#x').onclick=cl}
+catch(e){ov(`<div class="c card"><p>Something went wrong. Nothing was saved — please try again.</p><button id="x">CLOSE</button></div>`);$('#x').onclick=cl}busy=false}
+$('#tree').addEventListener('click',e=>{const g=e.target.closest('.orn');g&&openOrn(+g.dataset.n)});
+$('#tree').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const g=e.target.closest('.orn');g&&openOrn(+g.dataset.n)}});
+$('#bk').onclick=()=>showBank();
+$('#hp').onclick=()=>{ov(`<div class="c card"><h4>ABOUT</h4><p>31 ornaments, all open from day one, in any order. Each one can be received once. Every gift is saved in MY GIFT BANK exactly as you received it.</p>${sb?'<p class="sm">Your account is anonymous: clearing browser data may lose it unless you link a login.</p>':'<p class="sm">LOCAL DEMO MODE: gifts live only in this browser. Not secure, permanent or cross-device. Connect Supabase for the real thing.</p>'}<div class="row"><button id="dv">SETUP &amp; SQL</button><button class="ghost" id="x">CLOSE</button></div></div>`);$('#x').onclick=cl;$('#dv').onclick=()=>{ov(`<div class="card"><h4>SETUP · SCHEMA · SEED · README</h4><p class="sm">Copy this into the Supabase SQL editor (README notes are SQL comments). Then set SB_URL and SB_KEY in this file.</p><textarea id="sq" readonly style="width:100%;height:55vh;background:#000a;color:#f3e3b3;border:1px solid #d4af3766;border-radius:10px;font:12px monospace;direction:ltr"></textarea><div class="row"><button id="cp">COPY ALL</button><button class="ghost" id="x">CLOSE</button></div></div>`);$('#sq').value=$('#sqlsrc').textContent.trim();$('#x').onclick=cl;$('#cp').onclick=async()=>{$('#sq').select();try{await navigator.clipboard.writeText($('#sq').value);$('#cp').textContent='COPIED ✓'}catch(e){document.execCommand('copy')}}}};
+let ac,gn,os=[],on=false;
+function music(){if(!ac){ac=new(window.AudioContext||window.webkitAudioContext)();gn=ac.createGain();gn.connect(ac.destination);[196,246.9,293.7].forEach(f=>{const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=f;g.gain.value=.07;o.connect(g).connect(gn);o.start()});const H={D4:293.7,G4:392,A4:440,B4:493.9,D5:587.3,E5:659.3},S=[['D4',1],['G4',1.5],['G4',.5],['G4',1],['B4',1],['A4',1.5],['G4',.5],['A4',1],['B4',1],['G4',1.5],['G4',.5],['B4',1],['D5',1],['E5',3],['E5',1.5],['D5',.5],['D5',1],['B4',1],['B4',1.5],['G4',.5],['A4',1],['B4',.5],['A4',.5],['G4',3],[null,2]];let k=0;const step=()=>{if(!on){setTimeout(step,400);return}const[n,d]=S[k++%S.length];if(n){const t=ac.currentTime,f=H[n];[[f,.28],[f*2,.08]].forEach(([q,a])=>{const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=q;g.gain.setValueAtTime(a,t);g.gain.exponentialRampToValueAtTime(.001,t+d*.75+.6);o.connect(g).connect(gn);o.start(t);o.stop(t+d*.75+.7)})}setTimeout(step,d*750)};step()}
+on=!on;on?ac.resume():ac.suspend();$('#mu').textContent=on?'♪':'🔇';setVol()}
+const setVol=()=>{if(gn)gn.gain.value=$('#vol').value/100};
+$('#vol').oninput=setVol;$('#mu').onclick=music;
+$('#go').onclick=async()=>{$('#intro').hidden=true;$('#main').hidden=false;try{music()}catch(e){}await api.init().catch(()=>{});$('#demo').textContent=sb?'':'LOCAL DEMO MODE';await refresh()};
+</script></body></html>
